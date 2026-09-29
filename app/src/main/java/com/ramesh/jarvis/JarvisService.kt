@@ -39,7 +39,7 @@ class JarvisService : Service(), TextToSpeech.OnInitListener {
         val c=store.load(); val text=raw.trim(); if(text.isBlank()) return
         val wake=c.wakeWord.lowercase(Locale.getDefault()); val lower=text.lowercase(Locale.getDefault())
         if(!active && !lower.contains(wake)) return
-        if(!active){ active=true; say("Yes Master, I’m active."); val command=text.substringAfter(wake,"",ignoreCase=true).trim(); if(command.isNotBlank()) execute(command); return }
+        if(!active){ active=true; say("Yes Master, I’m active."); val command = text.drop(wake.length).trim(); if(command.isNotBlank()) execute(command); return }
         execute(text)
     }
     private fun execute(command:String) {
